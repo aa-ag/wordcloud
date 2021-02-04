@@ -5,9 +5,9 @@ import pandas as pd
 
 
 ###--- CODE ---###
-df = pd.read_csv(r'Youtube04-Eminem.csv', encoding="latin-1")
+df = pd.read_csv(r'Youtube03-LMFAO.csv', encoding="latin-1")
 
-comment_words = ''
+comments = ''
 sw = set(STOPWORDS)
 
 for i in df.CONTENT:
@@ -18,13 +18,13 @@ for i in df.CONTENT:
     for j in range(len(tokens)):
         tokens[j] = tokens[j].lower()
 
-    comment_words += ' '.join(tokens) + ' '
+    comments += ' '.join(tokens) + ' '
 
 
-wc = WordCloud(width=800, height=800, background_color='white',
-               stopwords=sw, min_font_size=10).generate(comment_words)
+wc = WordCloud(width=800, height=800, background_color='grey',
+               stopwords=sw, min_font_size=10).generate(comments)
 
-plt.figure(figsize=(8, 8), facecolor=None)
+plt.figure(figsize=(10, 10), facecolor=None)
 plt.imshow(wc)
 plt.axis('off')
 plt.tight_layout(pad=0)
