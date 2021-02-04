@@ -4,42 +4,28 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 
-###--- FUNCTIONS ---###
-print(len(STOPWORDS))  # 192
+###--- CODE ---###
+df = pd.read_csv(r'Youtube04-Eminem.csv', encoding="latin-1")
 
-sw = sorted(list(STOPWORDS))
+comment_words = ''
+sw = set(STOPWORDS)
 
-sw_paragraph = ''
+for i in df.CONTENT:
+    i = str(i)
 
-for i in range(0, len(sw), 10):
-    sw_paragraph += ''.join(', '.join(sw[i:i+10]) + '\n')
+    tokens = i.split()
 
-print(sw_paragraph)
+    for j in range(len(tokens)):
+        tokens[j] = tokens[j].lower()
 
-'''
-    a, about, above, after, again, against, all, also, am, an
-    and, any, are, aren't, as, at, be, because, been, before
-    being, below, between, both, but, by, can, can't, cannot, com
-    could, couldn't, did, didn't, do, does, doesn't, doing, don't, down
-    during, each, else, ever, few, for, from, further, get, had
-    hadn't, has, hasn't, have, haven't, having, he, he'd, he'll, he's
-    hence, her, here, here's, hers, herself, him, himself, his, how
-    how's, however, http, i, i'd, i'll, i'm, i've, if, in
-    into, is, isn't, it, it's, its, itself, just, k, let's
-    like, me, more, most, mustn't, my, myself, no, nor, not
-    of, off, on, once, only, or, other, otherwise, ought, our
-    ours, ourselves, out, over, own, r, same, shall, shan't, she
-    she'd, she'll, she's, should, shouldn't, since, so, some, such, than
-    that, that's, the, their, theirs, them, themselves, then, there, there's
-    therefore, these, they, they'd, they'll, they're, they've, this, those, through
-    to, too, under, until, up, very, was, wasn't, we, we'd
-    we'll, we're, we've, were, weren't, what, what's, when, when's, where
-    where's, which, while, who, who's, whom, why, why's, with, won't
-    would, wouldn't, www, you, you'd, you'll, you're, you've, your, yours
-    yourself, yourselves
-'''
+    comment_words += ' '.join(tokens) + ' '
 
 
-###--- DRIVER CODE ---###
-if __name__ == '__main__':
-    pass
+wc = WordCloud(width=800, height=800, background_color='white',
+               stopwords=sw, min_font_size=10).generate(comment_words)
+
+plt.figure(figsize=(8, 8), facecolor=None)
+plt.imshow(wc)
+plt.axis('off')
+plt.tight_layout(pad=0)
+plt.show()
