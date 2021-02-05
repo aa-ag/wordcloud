@@ -6,8 +6,13 @@ import settings
 import textract
 
 
-text = textract.process(settings.COURT_DECISION_PATH)
-print(text)
+###--- FUNCTIONS ---###
+def extract_text_from_pdf():
+    '''
+     extracts text from pdf in path
+    '''
+    text = textract.process(settings.COURT_DECISION_PATH)
+    print(text)
 
 
 # def read_csv_and_create_wordcloud():
@@ -39,5 +44,4 @@ print(text)
 ###--- DRIVER CODE ---###
 if __name__ == '__main__':
     # read_csv_and_create_wordcloud()
-    # extract_text_from_pdf()
-    pass
+    extract_text_from_pdf()
