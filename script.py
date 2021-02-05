@@ -2,8 +2,7 @@
 from wordcloud import WordCloud, STOPWORDS
 import matplotlib.pyplot as plt
 import pandas as pd
-import settings
-import textract
+import PyPDF2
 
 
 ###--- FUNCTIONS ---###
@@ -11,8 +10,14 @@ def extract_text_from_pdf():
     '''
      extracts text from pdf in path
     '''
-    text = textract.process(settings.COURT_DECISION_PATH)
-    print(text)
+    pdf_file = open('courtdecision.pdf', 'rb')
+    pdf_reader = PyPDF2.PdfFileReader(pdf_file)
+    count = pdf_reader.numPages
+
+    with open('courtdecision.txt', 'w+') as cd:
+        for i in range(count):
+            page = pdf_reader.getPage(i)
+            cd.write(page.extractText())
 
 
 # def read_csv_and_create_wordcloud():
