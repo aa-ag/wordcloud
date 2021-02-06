@@ -3,6 +3,8 @@ from wordcloud import WordCloud, STOPWORDS
 import matplotlib.pyplot as plt
 import pandas as pd
 import PyPDF2
+import settings
+from os import path
 
 
 ###--- FUNCTIONS ---###
@@ -42,6 +44,8 @@ def read_csv_and_create_wordcloud():
     plt.axis('off')
     plt.tight_layout(pad=0)
     plt.show()
+
+    wc.to_file(path.join(settings.DIR_PATH, "wordcloud.png"))
 
     text.close()
 
