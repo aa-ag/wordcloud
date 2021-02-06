@@ -27,8 +27,21 @@ def read_csv_and_create_wordcloud():
     '''
     text = open('courtdecision.txt', 'r')
 
+    text_string = ''
+
     for line in text:
-        print(line)
+        text_string += line
+
+    sw = set(STOPWORDS)
+
+    wc = WordCloud(width=800, height=800, background_color='white',
+                   stopwords=sw, min_font_size=10).generate(text_string)
+
+    plt.figure(figsize=(10, 10), facecolor=None)
+    plt.imshow(wc)
+    plt.axis('off')
+    plt.tight_layout(pad=0)
+    plt.show()
 
     text.close()
 
